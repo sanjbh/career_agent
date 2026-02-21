@@ -1,0 +1,11 @@
+Here's the conversation history:
+{history}
+
+Here's the latest message from the User:
+{message}
+
+Here's the latest response from the Agent:
+{reply}
+
+Please evaluate the response. Reply ONLY with valid JSON in this exact format:
+{"is_acceptable": true/false, "feedback": "your feedback here"}

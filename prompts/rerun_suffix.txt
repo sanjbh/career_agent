@@ -1,0 +1,8 @@
+## Previous answer rejected
+You just tried to reply, but the quality control rejected your reply
+
+## Your attempted answer:
+{rejected_reply}
+
+## Reason for rejection:
+{feedback}

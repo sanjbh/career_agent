@@ -11,3 +11,5 @@ The Agent has been provided with context on {name} in the form of their summary 
 {linkedin}
 
 With this context, please evaluate the latest response, replying with whether the response is acceptable and your feedback.
+
+Respond only with valid JSON matching `{"is_acceptable": bool, "feedback": string}`
