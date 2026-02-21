@@ -1,0 +1,10 @@
+[package]
+name = "career_agent"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.102"
+dotenvy = "0.15.7"
+pdf-extract = "0.10.0"
+validator = { version = "0.20.0", features = ["derive"] }
