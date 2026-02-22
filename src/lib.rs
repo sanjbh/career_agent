@@ -3,3 +3,4 @@ pub mod config;
 pub mod document;
 pub mod evaluator;
 pub mod prompts;
+pub mod server;
