@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
 use async_openai::types::chat::ChatCompletionRequestMessage;
+use axum::extract::State;
 use axum::{
     Json, Router,
     http::StatusCode,
@@ -34,7 +35,35 @@ pub async fn get_ui() -> Result<impl IntoResponse, AppError> {
     Ok(Html(content))
 }
 
-pub async fn post_chat(Json(payload): Json<ChatRequest>) -> Json<ChatResponse> {}
+pub async fn post_chat(
+    State(app_state): State<Arc<AppState>>,
+    Json(payload): Json<ChatRequest>,
+) -> Result<Json<ChatResponse>, AppError> {
+    let agent = &app_state.agent;
+    let evaluator = &app_state.evaluator;
+
+    let history = &payload.history;
+
+    let message = &payload.message;
+
+    let response = agent.chat(message, history).await?;
+
+    let evaluation = evaluator.evaluate(message, &response, history).await?;
+
+    let (final_reply, did_rerun) = if !evaluation.is_acceptable {
+        let improved_response = agent
+            .rerun(message, history, &response, &evaluation.feedback)
+            .await?;
+        (improved_response, true)
+    } else {
+        (response, false)
+    };
+    Ok(Json(ChatResponse {
+        reply: final_reply,
+        feedback: evaluation.feedback,
+        rerun: did_rerun,
+    }))
+}
 
 pub fn router(agent: Agent, evaluator: Evaluator) -> Router {
     let shared_state = Arc::new(AppState { agent, evaluator });
