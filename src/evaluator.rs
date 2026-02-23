@@ -70,6 +70,8 @@ impl Evaluator {
             .clone()
             .ok_or_else(|| anyhow::anyhow!("empty response"))?;
 
+        tracing::info!("Here is the content: {content}");
+
         serde_json::from_str::<Evaluation>(&content).context("failed to parse evaluation JSON")
     }
 }

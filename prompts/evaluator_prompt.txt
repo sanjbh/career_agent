@@ -12,4 +12,5 @@ The Agent has been provided with context on {name} in the form of their summary 
 
 With this context, please evaluate the latest response, replying with whether the response is acceptable and your feedback.
 
-Respond only with valid JSON matching `{"is_acceptable": bool, "feedback": string}`
+Please evaluate the response. Reply ONLY with valid JSON in this exact format, no markdown, no code fences, no explanation:
+{"is_acceptable": true/false, "feedback": "your feedback here"}

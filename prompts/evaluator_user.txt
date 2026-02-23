@@ -7,5 +7,5 @@ Here's the latest message from the User:
 Here's the latest response from the Agent:
 {reply}
 
-Please evaluate the response. Reply ONLY with valid JSON in this exact format:
+Please evaluate the response. Reply ONLY with valid JSON in this exact format, no markdown, no code fences, no explanation:
 {"is_acceptable": true/false, "feedback": "your feedback here"}
